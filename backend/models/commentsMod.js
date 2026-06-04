@@ -27,15 +27,6 @@ const CreateComment = async (authorId, comment, drawingId) => {
         throw err;
     }
 };
-const deleteComment = async (commentId) => {
-    try {
-        const sql = 'DELETE FROM comments WHERE id = ?';
-        const [result] = await con.query(sql, [commentId]);
-        return result.affectedRows === 0 ? null : commentId;
-    } catch (err) {
-        throw err;
-    }
-}
 const DeleteComment = async (commentId) => {
     try {
         const sql = 'DELETE FROM comments WHERE id = ?';
@@ -45,4 +36,4 @@ const DeleteComment = async (commentId) => {
         throw err;
     }
 }
-module.exports = { getAllCommentsByDrawing, CreateComment, deleteComment , DeleteComment };
+module.exports = { getAllCommentsByDrawing, CreateComment , DeleteComment };

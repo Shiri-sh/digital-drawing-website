@@ -18,7 +18,8 @@ CREATE TABLE Passwords (
 );
 CREATE TABLE Categories (
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    Name VARCHAR(50) NOT NULL
+    Name VARCHAR(50) NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE
 );
 CREATE TABLE Drawings (
     ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -26,6 +27,7 @@ CREATE TABLE Drawings (
     Source VARCHAR(255),
     Description TEXT,
     Name VARCHAR(100),
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
     FOREIGN KEY (CategoryID) REFERENCES Categories(ID)
 );
 CREATE TABLE Comments (
@@ -69,10 +71,16 @@ INSERT INTO Drawings (id, categoryId, source, description, name) VALUES
 (2, 2, 'grandfather.jpg', 'the portrait were maid after the grandfather pased away', 'Grandpa Klien'),
 (3, 3, 'grandParents.jpg', 'a present for the grandparents anniversary', 'Grandparents Lev'),
 (4, 3, 'maranovadya.jpg', 'we all miss him', 'Maran Harav Ovadya Yosef'),
-(5, 1, 'michalOrtzel.jpg', "a gift for my friend's birthday", 'Michal'),
+(5, 1, 'michalOrtzel.png', "a gift for my friend's birthday", 'Michal'),
 (6, 2, 'selfPortrait.jpg', 'my first painting-of-self', 'Your obidient servent:)'),
 (7, 1, 'teenage.jpg', 'super rialistic portrait', 'Ayelet'),
-(8, 3, 'twoFriends.jpg', 'a painting of two friends', 'Shiri and Osnat');
+(8, 3, 'twoFriends.jpg', 'a painting of two friends', 'Shiri and Osnat'),
+(9, 2, 'youngGirl.png', 'a painting of two friends', 'Shiri and Osnat'),
+(10, 3, 'yaelklien.jpg', 'My dear friend', 'Yael Klien'),
+(11, 1, 'yaelvalder.jpg', 'My dear friend', 'Yael Klien'),
+(12, 4, 'lightDog.jpg', 'Cute dog', 'Light dog'),
+(13, 2, 'hachafetsChaim.png', 'We all miss him', 'Hachafets Chaim');
+
 INSERT INTO comments (id, DrawingID, AuthorID, CommentText) VALUES
 (1, 1, 1, 'This portrait is amazing!'),
 (2, 2, 3, 'Love the colors and detail.'),
@@ -82,6 +90,7 @@ INSERT INTO comments (id, DrawingID, AuthorID, CommentText) VALUES
 (6, 6, 7, 'Such emotional depth in this painting.'),
 (7, 5, 6, 'Very creative scene.'),
 (8, 8, 8, 'Feels like a dream – love it!');
+
 INSERT INTO orders (id, userId, categoryId, description, status, OrderDate, CompletionDate,price) VALUES
 (1, 1, 1, 'Portrait based on uploaded photo', 'open', '2025-06-01', NULL,250),
 (2, 3, 2, 'Forest animals digital illustration', 'in_progress', '2025-06-02', NULL,400),
@@ -91,6 +100,7 @@ INSERT INTO orders (id, userId, categoryId, description, status, OrderDate, Comp
 (6, 7, 3, 'Comic for birthday gift', 'completed', '2025-05-10', '2025-05-27',370),
 (7, 6, 1, 'Black and white portrait with shading', 'open', '2025-06-04', NULL,400),
 (8, 8, 2, 'Nature illustration', 'open', '2025-06-05', NULL,NULL);
+
 INSERT INTO passwords (id, userId, password) VALUES
 (1, 1, '!shiriB'),
 (2, 2, 'Art@Home7'),
@@ -100,6 +110,8 @@ INSERT INTO passwords (id, userId, password) VALUES
 (6, 6, 'MyArt!99'),
 (7, 7, 'Color%Wave'),
 (8, 8, 'Line&Shape3');
+
+
 -- select * from comments where DrawingID=5;
 -- select * from comments
 -- SELECT * FROM drawings WHERE categoryId =1  and id > 5 LIMIT 1
@@ -108,6 +120,8 @@ INSERT INTO passwords (id, userId, password) VALUES
 -- select * from drawings ;
 -- delete  from drawings where id=9;
 -- ALTER TABLE categories
+-- ADD COLUMN is_active BOOLEAN not null DEFAULT TRUE;
+-- ALTER TABLE drawings
 -- ADD COLUMN is_active BOOLEAN not null DEFAULT TRUE;
 -- UPDATE categories
 -- SET is_active = TRUE;
